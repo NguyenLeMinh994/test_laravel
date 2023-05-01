@@ -16,9 +16,15 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(2);
+        $products = [];
+        if($request->has('q') && !empty($request->q)){
+            $products = Product::where('name','LIKE',"%{$request->q}%")->paginate();
+        }else{
+            $products = Product::paginate();
+        }
+
         return new ProductPagination($products);
     }
 

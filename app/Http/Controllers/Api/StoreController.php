@@ -15,9 +15,15 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $store = Store::paginate(2);
+        $store = [];
+        if($request->has('q') && !empty($request->q)){
+            $store = Store::where('name','LIKE',"%{$request->q}%")->paginate();
+        }else{
+            $store = Store::paginate();
+        }
+
         return new StorePagination($store);
     }
 
