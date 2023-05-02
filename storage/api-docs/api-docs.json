@@ -102,7 +102,7 @@
                 ]
             }
         },
-        "/products/{id}": {
+        "/api/products/{id}": {
             "get": {
                 "tags": [
                     "Products"
@@ -336,7 +336,7 @@
                 ]
             }
         },
-        "/stores/{id}": {
+        "/api/stores/{id}": {
             "get": {
                 "tags": [
                     "Stores"
@@ -534,6 +534,55 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "User logout",
+                "description": "User logout here",
+                "operationId": "logout",
+                "responses": {
+                    "201": {
+                        "description": "User logout successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "User logout successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unauthorised",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Unauthorised",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         }
     },

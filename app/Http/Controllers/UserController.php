@@ -63,6 +63,37 @@ class UserController extends Controller
         }
     }
 
+        /**
+     * @OA\Post(
+     * path="/api/logout",
+     * operationId="logout",
+     * tags={"Login"},
+     * summary="User logout",
+     * description="User logout here",
+     * security={{"bearerAuth": {}}},
+     * @OA\Response(
+     *  response=201,
+     *  description="User logout successfully",
+     *  @OA\JsonContent()
+     * ),
+     * @OA\Response(
+     *  response=200,
+     *  description="User logout successfully",
+     *  @OA\JsonContent()
+     * ),
+     * @OA\Response(
+     *  response=400,
+     *  description="Unauthorised",
+     *  @OA\JsonContent()
+     * ),
+     *
+     * @OA\Response(
+     *  response=404,
+     *  description="Unauthorised",
+     *  @OA\JsonContent()
+     * ),
+     * ),
+    */
     public function logout()
     {
         if (Auth::check()) {
