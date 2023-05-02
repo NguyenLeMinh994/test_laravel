@@ -7,4 +7,4 @@
 ## Swagger document
 - You often visit the link below for API documentation
 > <code>http://{SERVER_NAME}/api/documentation</code>
-- {SERVER_NAME} is the name you put on the domain on local and the local I set is as test_laravel.local
+- {SERVER_NAME} is the name you put on the domain on local and the local I set is as <code>test_laravel.local</code>
