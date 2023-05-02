@@ -106,7 +106,7 @@ class StoreController extends Controller
 
    /**
      * @OA\Get(
-     *      path="/stores/{id}",
+     *      path="/api/stores/{id}",
      *      operationId="showStore",
      *      tags={"Stores"},
      *      summary="Get store information",
@@ -147,7 +147,7 @@ class StoreController extends Controller
 
    /**
      * @OA\Put(
-     *      path="/stores/{id}",
+     *      path="/api/stores/{id}",
      *      operationId="updateStore",
      *      tags={"Stores"},
      *      summary="Update existing product",
@@ -214,7 +214,7 @@ class StoreController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/stores/{id}",
+     *      path="/api/stores/{id}",
      *      operationId="destroyStore",
      *      tags={"Stores"},
      *      summary="Delete existing store",

@@ -109,7 +109,7 @@ class ProductController extends Controller
 
    /**
      * @OA\Get(
-     *      path="/products/{id}",
+     *      path="/api/products/{id}",
      *      operationId="show",
      *      tags={"Products"},
      *      summary="Get product information",
@@ -150,7 +150,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Put(
-     *      path="/products/{id}",
+     *      path="/api/products/{id}",
      *      operationId="update",
      *      tags={"Products"},
      *      summary="Update existing product",
@@ -220,7 +220,7 @@ class ProductController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/products/{id}",
+     *      path="/api/products/{id}",
      *      operationId="destroy",
      *      tags={"Products"},
      *      summary="Delete existing product",
