@@ -10,7 +10,12 @@ use Illuminate\Routing\Controller as BaseController;
  * @OA\info(
  *  title = "Swagger Application",
  *  version = "1.0.0",
- * )
+ * ),
+ * @OA\SecurityScheme(
+ *  securityScheme="bearerAuth",
+ *  type="http",
+ *  scheme="bearer"
+ * ),
  */
 
 class Controller extends BaseController

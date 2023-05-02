@@ -18,11 +18,6 @@ class StoreController extends Controller
      *      summary="Get list of stores",
      *      description="Returns list of stores",
      *      security={{"bearerAuth": {}}},
-     *      @OA\SecurityScheme(
-     *         securityScheme="bearerAuth",
-     *         type="http",
-     *         scheme="bearer"
-     *      ),
      *      @OA\Parameter(
      *          required=false,
      *          name="q",
@@ -67,11 +62,6 @@ class StoreController extends Controller
      *      summary="Create Store",
      *      description="Create Store",
      *      security={{"bearerAuth": {}}},
-     *      @OA\SecurityScheme(
-     *         securityScheme="bearerAuth",
-     *         type="http",
-     *         scheme="bearer"
-     *      ),
      *      @OA\RequestBody(
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -122,11 +112,6 @@ class StoreController extends Controller
      *      summary="Get store information",
      *      description="Returns store data",
      *      security={{"bearerAuth": {}}},
-     *      @OA\SecurityScheme(
-     *         securityScheme="bearerAuth",
-     *         type="http",
-     *         scheme="bearer"
-     *      ),
      *      @OA\Parameter(
      *          name="id",
      *          description="store id",
@@ -168,11 +153,6 @@ class StoreController extends Controller
      *      summary="Update existing product",
      *      description="Returns updated product data",
      *      security={{"bearerAuth": {}}},
-     *      @OA\SecurityScheme(
-     *         securityScheme="bearerAuth",
-     *         type="http",
-     *         scheme="bearer"
-     *      ),
      *      @OA\Parameter(
      *          name="id",
      *          description="Store id",

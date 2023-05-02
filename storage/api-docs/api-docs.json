@@ -539,19 +539,11 @@
     },
     "components": {
         "securitySchemes": {
-            "passport": {
-                "type": "oauth2",
-                "description": "Laravel passport oauth2 security.",
-                "in": "header",
-                "scheme": "https",
-                "flows": {
-                    "password": {
-                        "authorizationUrl": "http://test_laravel.local/oauth/authorize",
-                        "tokenUrl": "http://test_laravel.local/oauth/token",
-                        "refreshUrl": "http://test_laravel.local/token/refresh",
-                        "scopes": []
-                    }
-                }
+            "bearerAuth": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
             }
         }
     }

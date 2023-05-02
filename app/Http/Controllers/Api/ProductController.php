@@ -18,11 +18,6 @@ class ProductController extends Controller
      *      summary="Get list of products",
      *      description="Returns list of products",
      *      security={{"bearerAuth": {}}},
-     *      @OA\SecurityScheme(
-     *         securityScheme="bearerAuth",
-     *         type="http",
-     *         scheme="bearer"
-     *      ),
      *      @OA\Parameter(
      *          required=false,
      *          name="q",
@@ -67,11 +62,6 @@ class ProductController extends Controller
      *      summary="Create product",
      *      description="Create product",
      *      security={{"bearerAuth": {}}},
-     *      @OA\SecurityScheme(
-     *         securityScheme="bearerAuth",
-     *         type="http",
-     *         scheme="bearer"
-     *      ),
      *      @OA\RequestBody(
      *          @OA\MediaType(
      *              mediaType="application/json",
@@ -125,11 +115,6 @@ class ProductController extends Controller
      *      summary="Get product information",
      *      description="Returns product data",
      *      security={{"bearerAuth": {}}},
-     *      @OA\SecurityScheme(
-     *         securityScheme="bearerAuth",
-     *         type="http",
-     *         scheme="bearer"
-     *      ),
      *      @OA\Parameter(
      *          name="id",
      *          description="product id",
@@ -171,11 +156,6 @@ class ProductController extends Controller
      *      summary="Update existing product",
      *      description="Returns updated product data",
      *      security={{"bearerAuth": {}}},
-     *      @OA\SecurityScheme(
-     *         securityScheme="bearerAuth",
-     *         type="http",
-     *         scheme="bearer"
-     *      ),
      *      @OA\Parameter(
      *          name="id",
      *          description="Product id",
