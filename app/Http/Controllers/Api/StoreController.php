@@ -11,9 +11,41 @@ use Illuminate\Http\Request;
 class StoreController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *      path="/api/stores",
+     *      operationId="indexStore",
+     *      tags={"Stores"},
+     *      summary="Get list of stores",
+     *      description="Returns list of stores",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\SecurityScheme(
+     *         securityScheme="bearerAuth",
+     *         type="http",
+     *         scheme="bearer"
+     *      ),
+     *      @OA\Parameter(
+     *          required=false,
+     *          name="q",
+     *          in="query",
+     *          description="search",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful product",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function index(Request $request)
     {
@@ -27,21 +59,43 @@ class StoreController extends Controller
         return new StorePagination($store);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     /**
+     * @OA\POST(
+     *      path="/api/stores",
+     *      operationId="storeStore",
+     *      tags={"Stores"},
+     *      summary="Create Store",
+     *      description="Create Store",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\SecurityScheme(
+     *         securityScheme="bearerAuth",
+     *         type="http",
+     *         scheme="bearer"
+     *      ),
+     *      @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                   type="object",
+     *                   @OA\Property(property="user_id",type="text",example="1"),
+     *                   @OA\Property(property="name",type="text",example="Store A"),
+     *                   @OA\Property(property="description",type="text",example="Store A"),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful store",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function store(Request $request)
     {
@@ -60,11 +114,45 @@ class StoreController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
+   /**
+     * @OA\Get(
+     *      path="/stores/{id}",
+     *      operationId="showStore",
+     *      tags={"Stores"},
+     *      summary="Get store information",
+     *      description="Returns store data",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\SecurityScheme(
+     *         securityScheme="bearerAuth",
+     *         type="http",
+     *         scheme="bearer"
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="store id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -72,23 +160,60 @@ class StoreController extends Controller
         return new StoreDetailCollection($store);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
+   /**
+     * @OA\Put(
+     *      path="/stores/{id}",
+     *      operationId="updateStore",
+     *      tags={"Stores"},
+     *      summary="Update existing product",
+     *      description="Returns updated product data",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\SecurityScheme(
+     *         securityScheme="bearerAuth",
+     *         type="http",
+     *         scheme="bearer"
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Store id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                   type="object",
+     *                   @OA\Property(property="user_id",type="text",example="1"),
+     *                   @OA\Property(property="name",type="text",example="Store A"),
+     *                   @OA\Property(property="description",type="text",example="Store A"),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=202,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
     public function update(Request $request,$id)
     {
@@ -108,10 +233,38 @@ class StoreController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Store  $store
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *      path="/stores/{id}",
+     *      operationId="destroyStore",
+     *      tags={"Stores"},
+     *      summary="Delete existing store",
+     *      description="Deletes a record",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Store id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
     public function destroy($id)
     {

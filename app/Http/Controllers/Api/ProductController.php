@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductDetailCollection;
 use App\Http\Resources\ProductPagination;
 use App\Models\Product;
@@ -12,9 +11,41 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *      path="/api/products",
+     *      operationId="index",
+     *      tags={"Products"},
+     *      summary="Get list of products",
+     *      description="Returns list of products",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\SecurityScheme(
+     *         securityScheme="bearerAuth",
+     *         type="http",
+     *         scheme="bearer"
+     *      ),
+     *      @OA\Parameter(
+     *          required=false,
+     *          name="q",
+     *          in="query",
+     *          description="search",
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful product",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function index(Request $request)
     {
@@ -28,21 +59,45 @@ class ProductController extends Controller
         return new ProductPagination($products);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     /**
+     * @OA\POST(
+     *      path="/api/products",
+     *      operationId="Store",
+     *      tags={"Products"},
+     *      summary="Create product",
+     *      description="Create product",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\SecurityScheme(
+     *         securityScheme="bearerAuth",
+     *         type="http",
+     *         scheme="bearer"
+     *      ),
+     *      @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                   type="object",
+     *                   @OA\Property(property="store_id",type="text",example="1"),
+     *                   @OA\Property(property="name",type="text",example="Product A"),
+     *                   @OA\Property(property="description",type="text",example="Product A"),
+     *                   @OA\Property(property="price",type="text",example="15.00"),
+     *                   @OA\Property(property="quantity",type="text",example="20"),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful product",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *     )
      */
     public function store(Request $request)
     {
@@ -62,11 +117,45 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+   /**
+     * @OA\Get(
+     *      path="/products/{id}",
+     *      operationId="show",
+     *      tags={"Products"},
+     *      summary="Get product information",
+     *      description="Returns product data",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\SecurityScheme(
+     *         securityScheme="bearerAuth",
+     *         type="http",
+     *         scheme="bearer"
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="product id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     * )
      */
     public function show($id)
     {
@@ -75,22 +164,61 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *      path="/products/{id}",
+     *      operationId="update",
+     *      tags={"Products"},
+     *      summary="Update existing product",
+     *      description="Returns updated product data",
+     *      security={{"bearerAuth": {}}},
+     *      @OA\SecurityScheme(
+     *         securityScheme="bearerAuth",
+     *         type="http",
+     *         scheme="bearer"
+     *      ),
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Product id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *              @OA\Schema(
+     *                   type="object",
+     *                   @OA\Property(property="store_id",type="text",example="1"),
+     *                   @OA\Property(property="name",type="text",example="Product A"),
+     *                   @OA\Property(property="description",type="text",example="Product A"),
+     *                   @OA\Property(property="price",type="text",example="15.00"),
+     *                   @OA\Property(property="quantity",type="text",example="20"),
+     *              ),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=202,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=400,
+     *          description="Bad Request"
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -111,10 +239,38 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *      path="/products/{id}",
+     *      operationId="destroy",
+     *      tags={"Products"},
+     *      summary="Delete existing product",
+     *      description="Deletes a record",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Product id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=204,
+     *          description="Successful operation",
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response(
+     *          response=404,
+     *          description="Resource Not Found"
+     *      )
+     * )
      */
     public function destroy($id)
     {
